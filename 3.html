@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12 Toán 1 - Chiến Binh Sân Cỏ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;700&family=Playfair+Display:ital@1&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #0c2461 0%, #1e3799 50%, #4a69bd 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            color: white;
+            position: relative;
+            padding: 20px;
+        }
+
+        .soccer-field {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(to bottom, transparent 45%, rgba(46, 204, 113, 0.1) 45%, rgba(46, 204, 113, 0.1) 55%, transparent 55%),
+                linear-gradient(to right, transparent 45%, rgba(46, 204, 113, 0.1) 45%, rgba(46, 204, 113, 0.1) 55%, transparent 55%);
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        .page-close-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff3838, #ff4d4d);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+        }
+
+        .page-close-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            background: linear-gradient(135deg, #ff4d4d, #ff3838);
+        }
+
+        .container {
+            width: 1000px;
+            max-width: 95%;
+            padding: 60px 40px;
+            background: rgba(10, 25, 80, 0.85);
+            border-radius: 25px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out;
+            overflow: hidden;
+            border: 3px solid #ffd700;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #ff3838, #ff9f1a, #ffd700, #ff9f1a, #ff3838);
+            border-radius: 25px 25px 0 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .title-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 80px;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            letter-spacing: 5px;
+        }
+
+        .title-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 64px;
+            background: linear-gradient(to right, #ff3838, #ff9f1a, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 10px 0;
+        }
+
+        .title-slogan {
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px;
+            color: #4a69bd;
+            margin-top: 10px;
+        }
+
+        .hero-content {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .quote-icon {
+            font-size: 40px;
+            color: #ff9f1a;
+            opacity: 0.5;
+            margin-bottom: 10px;
+        }
+
+        .hero-message {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 28px;
+            line-height: 1.8;
+            color: #ffffff;
+            max-width: 850px;
+            margin: 0 auto 25px;
+            padding: 0 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(255, 56, 56, 0.3) 0%, rgba(255, 159, 26, 0.3) 100%);
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .team-signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 36px;
+            color: #ff9f1a;
+            margin-top: 20px;
+            display: inline-block;
+            padding: 0 20px;
+            border-top: 2px dashed #ffd700;
+            padding-top: 15px;
+        }
+
+        .stats-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 40px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 56, 56, 0.2);
+        }
+
+        .stat-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            color: #4a69bd;
+            font-weight: bold;
+        }
+
+        .gallery-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .gallery-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #ff9f1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .gallery-title i {
+            color: #ff3838;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .image-card {
+            width: 100%;
+            height: 280px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            border: 3px solid #ffd700;
+        }
+
+        .image-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 56, 56, 0.4);
+            border-color: #ff3838;
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .image-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 56, 56, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+        }
+
+        .image-card:hover .remove-btn {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .remove-btn:hover {
+            background: rgb(220, 0, 0);
+            transform: scale(1.2);
+        }
+
+        .image-number {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffd700;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            border: 2px solid #ffd700;
+        }
+
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #ff3838 0%, #ff9f1a 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(255, 56, 56, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            min-width: 220px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 56, 56, 0.6);
+            background: linear-gradient(135deg, #ff9f1a 0%, #ff3838 100%);
+        }
+
+        .control-btn i {
+            font-size: 22px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #4a69bd, #1e3799);
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #1e3799, #0c2461);
+            box-shadow: 0 15px 30px rgba(30, 55, 153, 0.6);
+        }
+
+        .video-btn {
+            background: linear-gradient(135deg, #ffd700, #ff9f1a);
+        }
+
+        .video-btn:hover {
+            background: linear-gradient(135deg, #ff9f1a, #ffd700);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.6);
+        }
+
+        .small-back-btn {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            z-index: 100;
+        }
+
+        .small-back-link {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4a69bd, #1e3799);
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .small-back-link:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .soccer-ball {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.7;
+            font-size: 40px;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .ball-1 {
+            top: 10%;
+            left: 5%;
+            color: white;
+        }
+
+        .ball-2 {
+            bottom: 10%;
+            right: 5%;
+            color: #ffd700;
+            font-size: 50px;
+        }
+
+        .ball-3 {
+            top: 20%;
+            right: 8%;
+            color: #ff3838;
+            font-size: 35px;
+        }
+
+        .notice {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border-left: 5px solid #ff3838;
+            font-size: 16px;
+            color: #a5b1c2;
+        }
+
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-container {
+            width: 90%;
+            max-width: 800px;
+            background: #0c2461;
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+            border: 3px solid #ffd700;
+        }
+
+        .video-player {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .close-video {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background: #ff3838;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 2001;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 25px;
+                width: 100%;
+            }
+            
+            .title-number {
+                font-size: 60px;
+            }
+            
+            .title-text {
+                font-size: 48px;
+            }
+            
+            .hero-message {
+                font-size: 22px;
+                line-height: 1.6;
+            }
+            
+            .title-slogan {
+                font-size: 24px;
+            }
+            
+            .image-card {
+                height: 220px;
+            }
+            
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+            
+            .gallery-title {
+                font-size: 28px;
+            }
+            
+            .control-btn {
+                padding: 15px 30px;
+                font-size: 16px;
+                min-width: 180px;
+            }
+            
+            .remove-btn {
+                opacity: 1;
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+            }
+            
+            .page-close-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+                top: 15px;
+                right: 15px;
+            }
+            
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .video-player {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            .title-number {
+                font-size: 48px;
+            }
+            
+            .title-text {
+                font-size: 36px;
+            }
+            
+            .hero-message {
+                font-size: 18px;
+            }
+            
+            .title-slogan {
+                font-size: 20px;
+            }
+            
+            .image-card {
+                height: 200px;
+            }
+            
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 15px;
+            }
+            
+            .soccer-ball {
+                display: none;
+            }
+            
+            .page-close-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+                top: 10px;
+                right: 10px;
+            }
+            
+            .control-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .control-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .small-back-link {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .small-back-btn {
+                bottom: 20px;
+                left: 20px;
+            }
+            
+            .stats-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .video-player {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="soccer-field"></div>
+    
+    <div class="video-modal" id="videoModal">
+        <div class="video-container">
+            <button class="close-video" onclick="closeVideo()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="video-player">
+                <video id="highlightVideo" controls style="width:100%;height:100%;">
+                    <source src="bongda.mp3" type="audio/mpeg">
+                    Trình duyệt của bạn không hỗ trợ phát video.
+                </video>
+            </div>
+        </div>
+    </div>
+    
+    <a href="javascript:window.close();" class="page-close-btn" title="Đóng trang">
+        <i class="fas fa-times"></i>
+    </a>
+    
+    <div class="small-back-btn">
+        <a href="javascript:history.back();" class="small-back-link" title="Quay lại">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </div>
+    
+    <div class="soccer-ball ball-1">⚽</div>
+    <div class="soccer-ball ball-2">⚽</div>
+    <div class="soccer-ball ball-3">⚽</div>
+    
+    <div class="container">
+        <div class="main-title">
+            <div class="title-number">12</div>
+            <div class="title-text">Toán 1</div>
+            <div class="title-slogan">Chiến Binh Sân Cỏ</div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="quote-icon">
+                <i class="fas fa-quote-left"></i>
+            </div>
+            
+            <p class="hero-message">
+                "Cháy hết mình trên sân đấu, nỗ lực hết mình vì màu cờ sắc áo. 
+                <span class="highlight">12 Toán 1</span> - Không chỉ giỏi tính toán mà còn giỏi cả 'ghi bàn'!"
+            </p>
+            
+            <div class="team-signature">
+                Đội Bóng Huyền Thoại
+            </div>
+        </div>
+        
+        <div class="stats-section">
+            <div class="stat-item">
+                <div class="stat-number"><h1>∞</h1></div>
+                <div class="stat-label">Trận Đấu</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number"><h1>∞</h1></div>
+                <div class="stat-label">Bàn Thắng</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number"><h1>3</h1></div>
+                <div class="stat-label">Danh Hiệu</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Tinh Thần</div>
+            </div>
+        </div>
+        
+        <div class="gallery-section">
+            <h2 class="gallery-title">
+                <i class="fas fa-trophy"></i> Thời Khắc Huyền Thoại
+            </h2>
+            
+            <div class="gallery-container">
+                <div class="image-card">
+                    <img src="3.jpg" alt="Chiến thắng 1" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">1</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="anh31.jpg" alt="Chiến thắng 2" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">2</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="anh32.jpg" alt="Chiến thắng 3" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">3</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="anh33.jpg" alt="Chiến thắng 4" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">4</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="anh34.jpg" alt="Chiến thắng 5" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">5</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="anh35.jpg" alt="Chiến thắng 6" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">6</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="anh36.jpg" alt="Chiến thắng 7" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">7</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="anh37.jpg" alt="Chiến thắng 8" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">8</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="anh38.jpg" alt="Chiến thắng 9" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">9</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="anh39.jpg" alt="Chiến thắng 10" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">10</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="311.jpg" alt="Chiến thắng 11" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">11</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="312.jpg" alt="Chiến thắng 12" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">12</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="313.jpg" alt="Chiến thắng 13" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">13</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="314.jpg" alt="Chiến thắng 14" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">14</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="315.jpg" alt="Chiến thắng 15" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">15</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="316.jpg" alt="Chiến thắng 16" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">16</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="317.jpg" alt="Chiến thắng 17" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">17</div>
+                </div>
+                
+                <div class="image-card">
+                    <img src="318.jpg" alt="Chiến thắng 18" loading="lazy">
+                    <a href="javascript:void(0);" class="remove-btn" onclick="alert('Chức năng xóa đã tắt để bảo vệ kỷ niệm!');" title="Xóa ảnh">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="image-number">18</div>
+                </div>
+            </div>
+            
+            <div class="control-buttons">
+                <a href="javascript:history.back();" class="control-btn back-btn">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </a>
+                
+                <a href="javascript:void(0);" class="control-btn video-btn" onclick="showVideo()">
+                    <i class="fas fa-video"></i> Xem Highlight
+                </a>
+                
+                <a href="https://www.facebook.com/profile.php?id=61557465823018" class="control-btn" target="_blank" onclick="alert('Chuẩn bị tiến tới kho lưu trữ kỷ niệm của 12T1 23-26!');">
+                    <i class="fas fa-download"></i> Tải ảnh đội bóng
+                </a>
+            </div>
+            
+            <div class="notice">
+                <i class="fas fa-info-circle"></i>12T1 (23–26) — Một thời để nhớ
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showVideo() {
+            document.getElementById('videoModal').classList.add('active');
+            document.getElementById('highlightVideo').play();
+        }
+
+        function closeVideo() {
+            document.getElementById('videoModal').classList.remove('active');
+            document.getElementById('highlightVideo').pause();
+        }
+
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVideo();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Thanh Xuân Vườn Trường</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+width:100%;
+height:100vh;
+font-family:'Quicksand',sans-serif;
+background:
+radial-gradient(circle at top,#f6f1e8,#dcc9ac 55%,#bfa27f);
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+filter:saturate(.9);
+position: relative;
+}
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cpath d='M160 30c45 70-45 120 0 190s45 120 0 120' fill='none' stroke='rgba(120,95,65,0.18)' stroke-width='1'/%3E%3C/svg%3E");
+opacity:.5;
+pointer-events:none;
+z-index:0;
+}
+.corner{
+position:fixed;
+width:150px;
+height:150px;
+opacity:.28;
+pointer-events:none;
+z-index:2;
+background:
+url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M8 92c25-45 45-65 84-84' fill='none' stroke='rgba(120,95,65,0.65)' stroke-width='2'/%3E%3Ccircle cx='86' cy='14' r='4' fill='rgba(120,95,65,0.55)'/%3E%3C/svg%3E")
+no-repeat center/contain;
+}
+.corner.tl{top:18px;left:18px; animation: float 20s infinite ease-in-out; animation-delay: 0s;}
+.corner.tr{top:18px;right:18px;transform:scaleX(-1); animation: float 20s infinite ease-in-out; animation-delay: 5s;}
+.corner.bl{bottom:18px;left:18px;transform:scaleY(-1); animation: float 20s infinite ease-in-out; animation-delay: 10s;}
+.corner.br{bottom:18px;right:18px;transform:scale(-1); animation: float 20s infinite ease-in-out; animation-delay: 15s;}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+.corner.br { transform: scale(-1); }
+.corner.bl { transform: scaleY(-1); }
+.petals{
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:1;
+}
+.petals span{
+position:absolute;
+width:12px;
+height:12px;
+background:rgba(220,200,170,.7);
+border-radius:50% 0;
+transform:rotate(45deg);
+animation:fall 22s linear infinite;
+box-shadow:0 0 8px rgba(200,170,130,.6);
+}
+.petals span:nth-child(odd) {
+  background: rgba(255, 240, 220, 0.8);
+}
+@keyframes fall{
+0%{transform:translateY(-10vh) rotate(0deg);opacity:0; filter: blur(0px);}
+15%{opacity:.8; filter: blur(0px);}
+85%{opacity:.6; filter: blur(0px);}
+100%{transform:translateY(110vh) rotate(360deg);opacity:0; filter: blur(2px);}
+}
+.envelope{
+width:680px;
+height:440px;
+position:relative;
+background:
+linear-gradient(145deg,#f4ede3,#dbc5a6);
+border-radius:18px;
+box-shadow:
+0 32px 65px rgba(0,0,0,.28),
+inset 0 0 35px rgba(255,255,255,.5);
+cursor:pointer;
+overflow:hidden;
+border:1px solid rgba(130,100,70,.35);
+z-index:5;
+transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+.envelope:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 40px 80px rgba(0,0,0,.35), inset 0 0 35px rgba(255,255,255,.5);
+}
+.envelope::after{
+content:"";
+position:absolute;
+inset:22px;
+border:1px dashed rgba(130,100,70,.35);
+border-radius:14px;
+pointer-events:none;
+}
+.envelope::before{
+content:"";
+position:absolute;
+top:0;left:0;
+width:100%;height:100%;
+background:
+linear-gradient(to bottom,#e6d3b8 0%,#d9c1a0 30%,#cbb08c 100%);
+clip-path:polygon(0 0,100% 0,50% 55%);
+transform-origin:top;
+transition:transform 1.6s cubic-bezier(.25,.8,.25,1);
+z-index:4;
+box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+.envelope .flap-fold {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  background: linear-gradient(to bottom, #e6d3b8, #d4b890);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  z-index: 3;
+  transform-origin: top;
+  transition: transform 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.glow{
+position:absolute;
+inset:-15%;
+background:
+radial-gradient(circle,
+rgba(255,235,195,.8),
+transparent 65%);
+opacity:0;
+transition:opacity 1.4s ease;
+z-index:3;
+}
+.letter{
+position:absolute;
+bottom:-130%;
+left:0;
+width:100%;
+height:100%;
+background:
+linear-gradient(180deg,#fbf7f0,#ecd6b6);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+transition:bottom 1.6s cubic-bezier(.25,.8,.25,1);
+z-index:2;
+padding:48px;
+text-align:center;
+box-shadow:
+inset 0 0 45px rgba(120,90,60,.25);
+overflow: hidden;
+}
+.letter::before{
+content:"";
+position:absolute;
+inset:0;
+background:
+url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Ccircle cx='2' cy='2' r='1' fill='rgba(0,0,0,0.05)'/%3E%3C/svg%3E");
+opacity:.35;
+pointer-events:none;
+}
+.letter::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #cbb08c, #d9c1a0, #cbb08c);
+  opacity: 0.6;
+  z-index: 1;
+}
+.letter h1{
+font-family:'Dancing Script',cursive;
+font-size:56px;
+color:#5a2f00;
+text-shadow:
+1px 3px 6px rgba(0,0,0,.25),
+0 0 18px rgba(230,190,130,.6);
+white-space:nowrap;
+overflow:hidden;
+border-right:3px solid rgba(90,47,0,.7);
+width:0;
+letter-spacing:1px;
+position: relative;
+z-index: 2;
+}
+.envelope.open .letter h1{
+animation:
+typing 3s steps(28,end) forwards,
+blink .9s infinite;
+}
+@keyframes typing{
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+@keyframes blink{50%{border-color:transparent}}
+.letter span{
+margin-top:28px;
+font-family:'Playfair Display',serif;
+font-style:italic;
+color:#4a3a28;
+font-size:19px;
+opacity:0;
+transform:translateY(14px);
+transition:1.4s;
+position: relative;
+z-index: 2;
+letter-spacing: 0.5px;
+}
+.letter .quote {
+  font-size: 16px;
+  margin-top: 20px;
+  font-style: italic;
+  color: #6b5238;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1.6s ease 0.5s;
+  max-width: 80%;
+  line-height: 1.6;
+}
+.envelope.open .letter .quote {
+  opacity: 1;
+  transform: translateY(0);
+}
+.envelope.open::before{transform:rotateX(180deg); transition-delay: 0.2s;}
+.envelope.open .flap-fold { transform: rotateX(180deg); }
+.envelope.open .letter{bottom:0; transition-delay: 0.4s;}
+.envelope.open .glow{opacity:1; transition-delay: 0.3s;}
+.envelope.open .letter span{
+opacity:1;
+transform:translateY(0);
+transition-delay: 1.2s;
+}
+.logo-corner{
+position:absolute;
+top:14px;
+left:18px;
+width:70px;
+opacity:.7;
+z-index:5;
+border-radius: 50%;
+box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+transition: all 0.8s ease;
+}
+.logo-letter{
+width:120px;
+margin-bottom:22px;
+opacity:.7;
+filter:sepia(.35);
+border-radius: 50%;
+box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+position: relative;
+z-index: 2;
+transition: all 1s ease;
+}
+.envelope.open .logo-letter {
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  filter: sepia(0.2);
+}
+.logo-bg{
+position:fixed;
+bottom:40px;
+right:50px;
+width:180px;
+opacity:.035;
+pointer-events:none;
+animation: rotateSlow 120s infinite linear;
+}
+@keyframes rotateSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.envelope.open .logo-corner{
+opacity:0;
+transform:scale(.7) rotate(-180deg);
+transition:.6s ease;
+pointer-events:none;
+}
+.instruction {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #5a2f00;
+  font-size: 16px;
+  opacity: 0.8;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 30px;
+  backdrop-filter: blur(5px);
+  transition: all 0.5s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.instruction i {
+  font-size: 18px;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.7; }
+}
+.envelope.open + .instruction {
+  opacity: 0;
+  transform: translateX(-50%) translateY(20px);
+  pointer-events: none;
+}
+.light-beam {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  top: 0;
+  left: -100%;
+  z-index: 1;
+  transition: left 0.8s ease;
+}
+.envelope.open .letter .light-beam {
+  left: 100%;
+  transition: left 1.5s ease 0.8s;
+}
+.seal {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #cbb08c, #a8865e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5a2f00;
+  font-size: 24px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  z-index: 3;
+  opacity: 0.9;
+  transition: all 0.5s ease;
+}
+.envelope:hover .seal {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+.envelope.open .seal {
+  opacity: 0;
+  transform: scale(0.5) rotate(180deg);
+}
+</style>
+</head>
+<body>
+<div class="corner tl"></div>
+<div class="corner tr"></div>
+<div class="corner bl"></div>
+<div class="corner br"></div>
+<div class="petals">
+  <span style="left:12%; animation-delay: 0s;"></span>
+  <span style="left:28%; animation-delay: 4s;"></span>
+  <span style="left:45%; animation-delay: 8s;"></span>
+  <span style="left:62%; animation-delay: 12s;"></span>
+  <span style="left:78%; animation-delay: 16s;"></span>
+  <span style="left:5%; animation-delay: 2s;"></span>
+  <span style="left:22%; animation-delay: 6s;"></span>
+  <span style="left:38%; animation-delay: 10s;"></span>
+  <span style="left:55%; animation-delay: 14s;"></span>
+  <span style="left:72%; animation-delay: 18s;"></span>
+  <span style="left:90%; animation-delay: 20s;"></span>
+</div>
+<div class="envelope" onclick="openLetter()">
+  <div class="flap-fold"></div>
+  <img src="toan1.jpg" class="logo-corner">
+  <div class="seal">
+    <i class="fas fa-heart"></i>
+  </div>
+  <div class="glow"></div>
+  <div class="letter">
+    <div class="light-beam"></div>
+    <img src="author.jpg" class="logo-letter">
+    <h1>Thanh Xuân Vườn Trường</h1>
+    <span>Những ngày cũ khẽ chạm về…</span>
+    <div class="quote">"Ký ức thanh xuân là trang sách đẹp nhất mà thời gian không bao giờ lật qua"</div>
+  </div>
+</div>
+<div class="instruction">
+  <i class="fas fa-hand-pointer"></i>
+  Nhấn vào phong thư để mở
+</div>
+<img src="toan1.jpg" class="logo-bg">
+<script>
+function openLetter(){
+  const env = document.querySelector('.envelope');
+  if(env.classList.contains('open')) return;
+  
+  const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-page-turn-single-1100.mp3');
+  audio.volume = 0.3;
+  audio.play().catch(e => console.log("Âm thanh không thể phát tự động"));
+  
+  env.classList.add('open');
+
+  const title = document.querySelector('.letter h1');
+  title.style.animation = 'typing 3s steps(28,end) forwards, blink .9s infinite';
+  
+  const letterElements = document.querySelectorAll('.letter span, .letter .quote');
+  letterElements.forEach((el, index) => {
+    el.style.transitionDelay = `${1 + index * 0.3}s`;
+  });
+  
+  setTimeout(() => {
+    document.body.style.opacity = '0.8';
+    document.body.style.transition = 'opacity 1s ease';
+    
+    setTimeout(() => {
+      window.location.href = "project1.html";
+    }, 1000);
+  }, 5000);
+}
+
+const envelope = document.querySelector('.envelope');
+envelope.addEventListener('mouseenter', () => {
+  if (!envelope.classList.contains('open')) {
+    document.querySelector('.seal').style.transform = 'scale(1.1)';
+  }
+});
+
+envelope.addEventListener('mouseleave', () => {
+  if (!envelope.classList.contains('open')) {
+    document.querySelector('.seal').style.transform = 'scale(1)';
+  }
+});
+
+function createPetals() {
+  const petalsContainer = document.querySelector('.petals');
+  for (let i = 0; i < 8; i++) {
+    const petal = document.createElement('span');
+    petal.style.left = `${Math.random() * 100}%`;
+    petal.style.animationDelay = `${Math.random() * 25}s`;
+    petal.style.animationDuration = `${15 + Math.random() * 15}s`;
+    petalsContainer.appendChild(petal);
+  }
+}
+
+createPetals();
+</script>
+</body>
+</html>

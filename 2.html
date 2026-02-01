@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kỷ Niệm Khó Quên - 12 Toán 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            color: #4a3a28;
+            position: relative;
+            padding: 20px;
+        }
+
+        .page-close-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff6b6b, #ff4757);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+        }
+
+        .page-close-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            background: linear-gradient(135deg, #ff4757, #ff6b6b);
+        }
+
+        .container {
+            width: 950px;
+            max-width: 95%;
+            padding: 60px 40px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 25px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.15),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb);
+            border-radius: 25px 25px 0 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 58px;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .title-main {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff9a9e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
+        }
+
+        .tribute-content {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .quote-icon {
+            font-size: 40px;
+            color: #ff9a9e;
+            opacity: 0.3;
+            margin-bottom: 10px;
+        }
+
+        .message {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 22px;
+            line-height: 1.8;
+            color: #5a4a3a;
+            max-width: 750px;
+            margin: 0 auto 25px;
+            padding: 0 20px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(255, 154, 158, 0.15) 0%, rgba(250, 208, 196, 0.15) 100%);
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px;
+            color: #667eea;
+            margin-top: 20px;
+            display: inline-block;
+            padding: 0 20px;
+            border-top: 2px dashed #ff9a9e;
+            padding-top: 15px;
+        }
+
+        .new-quote-section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+            border-left: 5px solid #667eea;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .new-quote-section::before {
+            content: "❝";
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 60px;
+            color: #667eea;
+            opacity: 0.2;
+        }
+
+        .new-quote-section::after {
+            content: "❞";
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 60px;
+            color: #667eea;
+            opacity: 0.2;
+        }
+
+        .new-quote {
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px;
+            color: #764ba2;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .quote-author {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 18px;
+            color: #667eea;
+            font-style: italic;
+        }
+
+        .video-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255, 250, 245, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .video-title {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: #764ba2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .video-title i {
+            color: #ff9a9e;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-container:hover .video-overlay {
+            opacity: 1;
+        }
+
+        .video-play-btn {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            color: #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .video-play-btn:hover {
+            transform: scale(1.1);
+            background: white;
+        }
+
+        .video-remove-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 0, 0, 0.85);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-container:hover .video-remove-btn {
+            opacity: 1;
+        }
+
+        .video-remove-btn:hover {
+            background: rgb(220, 0, 0);
+            transform: scale(1.1);
+        }
+
+        .gallery-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255, 250, 245, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .gallery-title {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #764ba2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .gallery-title i {
+            color: #ff9a9e;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .image-card {
+            width: 100%;
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .image-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .image-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 0, 0, 0.85);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-card:hover .remove-btn {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .remove-btn:hover {
+            background: rgb(220, 0, 0);
+            transform: scale(1.2);
+        }
+
+        .image-number {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            min-width: 200px;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.6);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        .control-btn i {
+            font-size: 20px;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #56ab2f, #a8e063);
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #4a9c26, #95d154);
+            box-shadow: 0 15px 30px rgba(86, 171, 47, 0.6);
+        }
+
+        .music-btn {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        }
+
+        .music-btn:hover {
+            background: linear-gradient(135deg, #f78a8f, #eac0b4);
+            box-shadow: 0 15px 30px rgba(255, 154, 158, 0.6);
+        }
+
+        .small-back-btn {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            z-index: 100;
+        }
+
+        .small-back-link {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #56ab2f, #a8e063);
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .small-back-link:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .flower {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.7;
+        }
+
+        .flower-1 {
+            top: 10%;
+            left: 5%;
+            font-size: 40px;
+            color: #ff9a9e;
+            transform: rotate(-15deg);
+        }
+
+        .flower-2 {
+            bottom: 10%;
+            right: 5%;
+            font-size: 50px;
+            color: #764ba2;
+            transform: rotate(20deg);
+        }
+
+        .flower-3 {
+            top: 20%;
+            right: 8%;
+            font-size: 35px;
+            color: #fad0c4;
+            transform: rotate(10deg);
+        }
+
+        .notice {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(255, 250, 240, 0.8);
+            border-radius: 10px;
+            border-left: 5px solid #ff9a9e;
+            font-size: 16px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 25px;
+                width: 100%;
+            }
+            
+            .title {
+                font-size: 42px;
+            }
+            
+            .message {
+                font-size: 18px;
+                line-height: 1.7;
+            }
+            
+            .new-quote {
+                font-size: 26px;
+            }
+            
+            .image-card {
+                height: 200px;
+            }
+            
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .gallery-title,
+            .video-title {
+                font-size: 24px;
+            }
+            
+            .control-btn {
+                padding: 12px 25px;
+                font-size: 16px;
+                min-width: 180px;
+            }
+            
+            .remove-btn,
+            .video-remove-btn {
+                opacity: 1;
+                width: 25px;
+                height: 25px;
+                font-size: 16px;
+            }
+            
+            .video-play-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .page-close-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+                top: 15px;
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            .title {
+                font-size: 36px;
+            }
+            
+            .message {
+                font-size: 16px;
+            }
+            
+            .new-quote {
+                font-size: 22px;
+            }
+            
+            .image-card {
+                height: 180px;
+            }
+            
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 15px;
+            }
+            
+            .flower {
+                display: none;
+            }
+            
+            .page-close-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+                top: 10px;
+                right: 10px;
+            }
+            
+            .control-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .control-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .small-back-link {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .small-back-btn {
+                bottom: 20px;
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="javascript:window.close();" class="page-close-btn" title="Đóng trang">
+        <i class="fas fa-times"></i>
+    </a>
+    
+    <div class="small-back-btn">
+        <a href="javascript:history.back();" class="small-back-link" title="Quay lại">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </div>
+    
+    <div class="flower flower-1">🌸</div>
+    <div class="flower flower-2">🌺</div>
+    <div class="flower flower-3">💮</div>
+    
+    <div class="container">
+        <h1 class="title">
+            <span class="title-main">Kỷ Niệm Khó Quên</span>
+        </h1>
+        
+        <div class="tribute-content">
+            <div class="quote-icon">
+                <i class="fas fa-quote-left"></i>
+            </div>
+        </div>
+        
+        <div class="new-quote-section">
+            <p class="new-quote">
+                "Đường lên đỉnh núi có thể mệt, nhưng có bạn đồng hành bên cạnh thì mọi dốc cao đều trở thành kỷ niệm đẹp."
+            </p>
+            <p class="quote-author">- Hành trình tri thức -</p>
+        </div>
+        
+        <div class="video-section">
+            <h2 class="video-title">
+                <i class="fas fa-video"></i> Kỷ niệm video
+            </h2>
+            
+            <div class="video-container">
+                <video id="memoryVideo" poster="2.jpg" controls>
+                    <source src="anh2.mp4" type="video/mp4">
+                    Trình duyệt của bạn không hỗ trợ video.
+                </video>
+                
+                <div class="video-overlay">
+                    <div class="video-play-btn" onclick="document.getElementById('memoryVideo').play()">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                
+                <a href="javascript:void(0);" class="video-remove-btn" onclick="alert('Chức năng xóa video đã tắt để bảo vệ kỷ niệm!');" title="Xóa video">
+                    <i class="fas fa-times"></i>
+                </a>
+            </div>
+        </div>
+            
+        <div class="control-buttons">
+            <a href="javascript:history.back();" class="control-btn back-btn">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </a>
+            
+            <a href="https://youtu.be/lMKfZwnHzig?si=dIzQhu-QMBxuxF_t" target="_blank" class="control-btn music-btn">
+                <i class="fas fa-music"></i> Nghe nhạc tri ân
+            </a>
+            
+            <a href="https://www.facebook.com/profile.php?id=61557465823018" target="_blank" class="control-btn" onclick="alert('Chuẩn bị tiến tới kho lưu trữ kỷ niệm của 12T1 23-26!');">
+                <i class="fas fa-download"></i> Tải ảnh lưu niệm
+            </a>
+        </div>
+        
+        <div class="notice">
+            <i class="fas fa-info-circle"></i>12T1 (23–26) — Một thời để nhớ
+        </div>
+    </div>
+</body>
+</html>

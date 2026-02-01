@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Biển Xanh – Tình Bạn</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+width:100%;
+height:100vh;
+font-family:'Quicksand',sans-serif;
+background:
+linear-gradient(to bottom,#7dd3fc,#c7ebff,#ffffff);
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
+
+/* KHUNG CHÍNH */
+.frame{
+max-width:1000px;
+padding:90px 110px;
+background:
+linear-gradient(#ffffff,#f5fbff),
+url("https://www.transparenttextures.com/patterns/clean-gray-paper.png");
+border-radius:52px;
+border:8px solid #5ecbff;
+box-shadow:
+0 50px 100px rgba(0,0,0,.35),
+inset 0 0 40px rgba(120,210,255,.45);
+text-align:center;
+position:relative;
+animation:floatUp 1.3s ease;
+}
+
+/* ICON */
+.frame::before{
+content:"🌊🐠";
+position:absolute;
+top:-46px;
+left:50%;
+transform:translateX(-50%);
+font-size:60px;
+}
+
+/* NỘI DUNG */
+.quote{
+font-size:28px;
+line-height:2;
+color:#034078;
+font-style:italic;
+}
+
+.quote b{
+color:#0284c7;
+font-weight:700;
+}
+
+.quote span{
+display:block;
+margin-top:34px;
+font-family:'Dancing Script',cursive;
+font-size:46px;
+background:linear-gradient(to right,#0284c7,#38bdf8);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* NÚT */
+.back{
+margin-top:75px;
+display:inline-block;
+padding:18px 62px;
+border-radius:60px;
+font-size:18px;
+text-decoration:none;
+color:#fff;
+background:linear-gradient(135deg,#38bdf8,#0284c7);
+box-shadow:0 24px 45px rgba(0,0,0,.35);
+transition:.35s;
+}
+.back:hover{
+transform:translateY(-6px) scale(1.06);
+}
+
+/* HIỆU ỨNG */
+@keyframes floatUp{
+from{
+opacity:0;
+transform:translateY(55px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="frame">
+<div class="quote">
+“<b>Khám phá thế giới dưới nước</b>
+cùng những <b>người bạn tuyệt vời nhất</b>.
+<br>
+<b>Biển xanh</b>, <b>cát trắng</b>
+và… <b>chúng mình</b>!”
+<span>
+Thanh Xuân Mùa Hè
+</span>
+</div>
+
+<a href="index.html" class="back">Quay lại</a>
+</div>
+
+</body>
+</html>

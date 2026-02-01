@@ -1,0 +1,221 @@
+/* EFFECT OVERLAY */
+.effect{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.6);
+display:none;
+justify-content:center;
+align-items:center;
+backdrop-filter:blur(6px);
+z-index:10000;
+cursor:pointer;
+}
+
+/* EFFECT TEXT */
+.effect-text{
+font-family:'Dancing Script',cursive;
+font-size:48px;
+color:#fff;
+max-width:900px;
+text-align:center;
+line-height:1.6;
+animation:fadeUp .6s ease;
+text-shadow:0 10px 30px rgba(0,0,0,.6);
+}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(30px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(25px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+/* ================= LÁ RƠI ================= */
+.leaf{
+position:absolute;
+top:-40px;
+width:36px;
+height:36px;
+background:url("leaf.png") center/contain no-repeat;
+animation:leafFall linear infinite;
+opacity:.9;
+}
+
+@keyframes leafFall{
+to{
+transform:translateY(140vh) rotate(360deg);
+}
+}
+
+/* ================= MƯA RƠI ================= */
+.rain{
+position:absolute;
+top:-30px;
+width:2px;
+height:28px;
+background:linear-gradient(
+to bottom,
+rgba(255,255,255,.9),
+transparent
+);
+animation:rainFall linear infinite;
+opacity:.8;
+}
+
+@keyframes rainFall{
+to{
+transform:translateY(140vh);
+}
+}
+
+/* ================= MẶT TRỜI ================= */
+.sun{
+position:absolute;
+top:8%;
+right:10%;
+width:180px;
+height:180px;
+border-radius:50%;
+background:radial-gradient(
+circle,
+#fff8b0,
+#ffd700,
+#ffae00
+);
+box-shadow:0 0 90px rgba(255,200,0,.95);
+animation:sunPulse 4s ease-in-out infinite;
+z-index:1;
+}
+
+@keyframes sunPulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.08)}
+100%{transform:scale(1)}
+}
+
+/* ================= ÁNH NẮNG RƠI ================= */
+.light{
+position:absolute;
+top:-20vh;
+width:140px;
+height:140px;
+border-radius:50%;
+background:radial-gradient(
+circle,
+rgba(255,255,210,.9),
+transparent 70%
+);
+animation:lightFall linear infinite;
+opacity:.9;
+z-index:0;
+}
+
+@keyframes lightFall{
+to{
+transform:translateY(140vh);
+}
+}
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 15% 30%,rgba(255,180,120,.18) 0 2px,transparent 3px),
+radial-gradient(circle at 70% 20%,rgba(180,200,255,.18) 0 2px,transparent 3px),
+radial-gradient(circle at 40% 80%,rgba(255,200,200,.18) 0 2px,transparent 3px);
+background-size:120px 120px;
+pointer-events:none;
+z-index:-1;
+}
+
+
+.decor{
+position:fixed;
+font-size:120px;
+opacity:.05;
+pointer-events:none;
+}
+
+.decor1{
+top:120px;
+left:40px;
+transform:rotate(-15deg);
+}
+
+.decor2{
+bottom:100px;
+right:60px;
+transform:rotate(20deg);
+}
+.paper-corner{
+position:absolute;
+width:60px;
+height:60px;
+background:rgba(255,255,255,.65);
+clip-path:polygon(0 0,100% 0,0 100%);
+top:0;
+right:0;
+opacity:.6;
+}
+.wave{
+position:absolute;
+inset:-35px;
+border-radius:60px;
+border:3px dotted rgba(180,200,255,.25);
+pointer-events:none;
+}
+.tape{
+position:absolute;
+width:120px;
+height:28px;
+background:rgba(255,220,160,.65);
+top:-14px;
+left:50%;
+transform:translateX(-50%) rotate(-3deg);
+border-radius:6px;
+box-shadow:0 6px 15px rgba(0,0,0,.12);
+}
+.bg-decor{
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:-1;
+}
+
+.bg-decor span{
+position:absolute;
+font-size:80px;
+opacity:.35;
+color:#f4b183;
+filter:blur(.3px);
+}
+
+.bg-decor span:nth-child(1){
+top:12%;
+left:6%;
+transform:rotate(-15deg);
+}
+
+.bg-decor span:nth-child(2){
+top:20%;
+right:8%;
+font-size:90px;
+color:#f7c6c7;
+}
+
+.bg-decor span:nth-child(3){
+bottom:18%;
+left:10%;
+font-size:70px;
+color:#cdb4db;
+}
+
+.bg-decor span:nth-child(4){
+bottom:14%;
+right:6%;
+font-size:85px;
+color:#ffe066;
+}
